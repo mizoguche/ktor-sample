@@ -37,7 +37,7 @@ fun main(args: Array<String>) {
                     call.respond(HttpStatusCode.BadRequest)
                 } else {
                     val item = Item(id)
-                    val model = Model("$id", item)
+                    val model = Model("name of $id", item)
                     call.respond(model)
                 }
             }
