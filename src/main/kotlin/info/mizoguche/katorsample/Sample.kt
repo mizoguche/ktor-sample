@@ -6,12 +6,10 @@ import io.ktor.application.call
 import io.ktor.application.install
 import io.ktor.features.CallLogging
 import io.ktor.features.ContentNegotiation
-import io.ktor.http.ContentType
+import io.ktor.features.DefaultHeaders
 import io.ktor.http.HttpStatusCode
-import io.ktor.http.HttpStatusCode.Companion
 import io.ktor.jackson.jackson
 import io.ktor.response.respond
-import io.ktor.response.respondText
 import io.ktor.routing.Routing
 import io.ktor.routing.get
 import io.ktor.server.engine.embeddedServer
@@ -22,6 +20,9 @@ data class Item(val id: String)
 
 fun main(args: Array<String>) {
     embeddedServer(Netty, 8080) {
+        install(DefaultHeaders) {
+            header("X-Custom-Header", "hogehoge")
+        }
         install(CallLogging)
         install(ContentNegotiation) {
             jackson {
